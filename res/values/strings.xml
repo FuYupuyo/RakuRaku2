@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">楽々２</string>
+    <string name="action_settings">設定</string>
+    <string name="item_detail">詳細</string>
+    
+    <string name="settings_age">年齢</string>
+    <string name="settings_sex">性別</string>
+    <string name="settings_action">検索</string>
+
+</resources>
