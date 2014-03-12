@@ -12,8 +12,9 @@ import android.widget.AdapterView.OnItemClickListener;
 public class OnRankingItemClickListener implements OnItemClickListener {
 	private Activity mActivity;
 
-	public void setActivity(Activity c) {
-		mActivity = c;
+	public OnRankingItemClickListener(Activity mActivity) {
+		super();
+		this.mActivity = mActivity;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import own.fuyupuyo.common.PuyoUtil;
 import own.fuyupuyo.model.RankingItem;
 
+@SuppressWarnings("serial")
 public class RankingArrayList extends ArrayList<RankingItem> {
 	private JSONArray mItemsArray;
 
