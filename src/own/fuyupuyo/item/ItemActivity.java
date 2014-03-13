@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 public class ItemActivity extends Activity {
@@ -51,7 +52,8 @@ public class ItemActivity extends Activity {
 		mPrice = (TextView) findViewById(R.id.item_price);
 		mPrice.setText(intent.getStringExtra("price"));
 		mCaption = (TextView) findViewById(R.id.item_caption);
-		mCaption.setText(intent.getStringExtra("caption"));
+		CharSequence cs = Html.fromHtml(intent.getStringExtra("caption"));
+		mCaption.setText(cs);
 	}
 
 	@Override
