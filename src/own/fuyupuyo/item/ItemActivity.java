@@ -18,7 +18,6 @@ import android.text.Html;
 import android.widget.TextView;
 
 public class ItemActivity extends Activity {
-	private Activity mActivity;
 	private static final Object TAG_REQUEST_QUEUE = new Object();
 	private RequestQueue mRequestQueue;
 	private ImageLoader mImageLoader;
@@ -30,11 +29,10 @@ public class ItemActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mActivity = this;
 		Intent intent = getIntent();
 		if (intent == null) {
-			PuyoUtil.showToast(mActivity, "アイテムの情報が取得できませんでした");
-			PageDispatcher.dispatchMainPage(mActivity, null);
+			PuyoUtil.showToast(this, "アイテムの情報が取得できませんでした");
+			PageDispatcher.dispatchMainPage(this, null);
 			return;
 		}
 		setView(intent);

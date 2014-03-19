@@ -14,13 +14,11 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 
 public class MainActivity extends Activity implements OnMenuItemClickListener {
-	private Activity mActivity;
 	private RequestQueue mQueue;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mActivity = this;
 		setView();
 		setRanking();
 	}
@@ -35,11 +33,11 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		if (intent.getStringExtra("parameter") != null) {
 			url = url + intent.getStringExtra("parameter");
 		}
-		mQueue = Volley.newRequestQueue(mActivity);
+		mQueue = Volley.newRequestQueue(this);
 		JsonObjectRequest request = new JsonObjectRequest(
 				com.android.volley.Request.Method.GET, url, null,
-				new RankingResponse(mActivity), 
-				new RankingErrorResponse(mActivity)
+				new RankingResponse(this), 
+				new RankingErrorResponse(this)
 		);
 		mQueue.add(request);
 	}
@@ -60,7 +58,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			PageDispatcher.dispatchSettingPage(mActivity);
+			PageDispatcher.dispatchSettingPage(this);
 			break;
 		default:
 			break;

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 public class SettingsActivity extends Activity implements
 		OnItemSelectedListener, OnClickListener {
-	private Activity mActivity;
 	private Spinner mSexSpinner;
 	private Spinner mAgeSpinner;
 	private TextView mSearchButton;
@@ -22,7 +21,6 @@ public class SettingsActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mActivity = this;
 		mParam = new UrlParameter();
 		setView();
 	}
@@ -39,7 +37,7 @@ public class SettingsActivity extends Activity implements
 
 	@Override
 	public void onClick(View v) {
-		PageDispatcher.dispatchMainPage(mActivity, mParam);
+		PageDispatcher.dispatchMainPage(this, mParam);
 	}
 
 	@Override
