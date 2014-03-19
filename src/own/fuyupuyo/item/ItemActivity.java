@@ -1,5 +1,6 @@
 package own.fuyupuyo.item;
 
+import own.fuyupuyo.common.BitmapLruCache;
 import own.fuyupuyo.common.PageDispatcher;
 import own.fuyupuyo.common.PuyoUtil;
 import own.fuyupuyo.rakuraku2.R;
@@ -12,7 +13,6 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
@@ -40,7 +40,7 @@ public class ItemActivity extends Activity {
 
 	private void setView(Intent intent) {
 		setContentView(R.layout.activity_item);
-		mCache = getCacheNone();
+		mCache = new BitmapLruCache();
 		mRequestQueue = Volley.newRequestQueue(getApplicationContext());
 		mImageLoader = new ImageLoader(mRequestQueue, mCache);
 		NetworkImageView image = (NetworkImageView) findViewById(R.id.item_image);
@@ -58,21 +58,5 @@ public class ItemActivity extends Activity {
 	public void onStop() {
 		super.onStop();
 		mRequestQueue.cancelAll(TAG_REQUEST_QUEUE);
-	}
-
-	/*
-	 * TODO: Volleyのキャッシュの仕組みを理解して、キャッシュを利用しないためnullにする
-	 */
-	private ImageCache getCacheNone() {
-		return new ImageCache() {
-			@Override
-			public Bitmap getBitmap(String url) {
-				return null;
-			}
-
-			@Override
-			public void putBitmap(String url, Bitmap bitmap) {
-			}
-		};
 	}
 }

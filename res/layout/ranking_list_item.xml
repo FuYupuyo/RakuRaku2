@@ -6,7 +6,7 @@
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/small_image"
-        android:layout_width="wrap_content"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher" />
 
@@ -14,8 +14,10 @@
         android:id="@+id/item_rank_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
+        android:background="#A00"
         android:scrollHorizontally="true"
+        android:textColor="#FFF"
         android:textSize="16sp" />
 
     <TextView
