@@ -10,15 +10,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 
 public class RankingResponse implements Response.Listener<JSONObject> {
 	private Activity mActivity;
+	private RequestQueue mQueue;
 	private ListView mListView;
 
-	public RankingResponse(Activity mActivity) {
+	public RankingResponse(Activity activity, RequestQueue queue) {
 		super();
-		this.mActivity = mActivity;
+		mActivity = activity;
+		mQueue = queue;
 		mListView = (ListView) mActivity.findViewById(R.id.ranking_list_view);
 	}
 
@@ -30,7 +33,7 @@ public class RankingResponse implements Response.Listener<JSONObject> {
 			e.printStackTrace();
 		}
 		RankingArrayList list = new RankingArrayList(response, defaultBitmap());
-		ItemAdapter adapter = new ItemAdapter(mActivity, list);
+		ItemAdapter adapter = new ItemAdapter(mActivity, list, mQueue);
 		OnRankingItemClickListener listener = new OnRankingItemClickListener(
 				mActivity);
 		mListView.setAdapter(adapter);

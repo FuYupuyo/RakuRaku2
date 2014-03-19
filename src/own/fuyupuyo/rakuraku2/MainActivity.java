@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
 		mQueue = Volley.newRequestQueue(this);
 		JsonObjectRequest request = new JsonObjectRequest(
 				com.android.volley.Request.Method.GET, url, null,
-				new RankingResponse(this), 
+				new RankingResponse(this, mQueue), 
 				new RankingErrorResponse(this)
 		);
 		mQueue.add(request);

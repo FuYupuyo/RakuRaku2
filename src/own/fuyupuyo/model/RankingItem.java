@@ -1,38 +1,36 @@
 package own.fuyupuyo.model;
 
-import android.graphics.Bitmap;
-
 public class RankingItem {
-	private Bitmap smallImage;
+	private String smallImageUrl;
 	private String imageUrl;
 	private String name;
 	private String price;
 	private String caption;
 
-	public RankingItem(){
+	public RankingItem() {
 		super();
 		this.imageUrl = "";
 		this.name = "";
 		this.price = "";
 		this.caption = "";
 	}
-	
-	public RankingItem(Bitmap smallImage, String imageUrl, String name,
+
+	public RankingItem(String smallImageUrl, String imageUrl, String name,
 			String price, String caption) {
 		super();
-		this.smallImage = smallImage;
+		this.smallImageUrl = smallImageUrl;
 		this.imageUrl = imageUrl;
 		this.name = name;
 		this.price = price;
 		this.caption = caption;
 	}
 
-	public Bitmap getSmallImage() {
-		return smallImage;
+	public String getSmallImageUrl() {
+		return smallImageUrl;
 	}
 
-	public void setSmallImage(Bitmap smallImage) {
-		this.smallImage = smallImage;
+	public void setSmallImageUrl(String smallImageUrl) {
+		this.smallImageUrl = smallImageUrl;
 	}
 
 	public String getImageUrl() {

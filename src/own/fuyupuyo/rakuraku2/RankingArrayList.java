@@ -25,14 +25,14 @@ public class RankingArrayList extends ArrayList<RankingItem> {
 			for (Integer i = 0; i < mItemsArray.length(); i++) {
 				JSONObject Item;
 				Item = mItemsArray.getJSONObject(i).getJSONObject("Item");
-				String url = Item.getJSONArray("smallImageUrls")
+				String smallImageurl = Item.getJSONArray("smallImageUrls")
 						.getJSONObject(0).getString("imageUrl");
-				url = PuyoUtil.cutParameter(url);
+				String imageUrl = PuyoUtil.cutParameter(smallImageurl);
 				String name = Item.getString("itemName");
 				String price = Item.getString("itemPrice");
 				String caption = Item.getString("itemCaption");
-				RankingItem data = new RankingItem(defaultBitmap, url, name,
-						price, caption);
+				RankingItem data = new RankingItem(smallImageurl, imageUrl,
+						name, price, caption);
 				add(data);
 			}
 		} catch (JSONException e) {
