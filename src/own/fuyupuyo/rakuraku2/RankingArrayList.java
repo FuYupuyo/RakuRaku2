@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
 import own.fuyupuyo.common.PuyoUtil;
 import own.fuyupuyo.model.RankingItem;
 
@@ -14,12 +13,12 @@ import own.fuyupuyo.model.RankingItem;
 public class RankingArrayList extends ArrayList<RankingItem> {
 	private JSONArray mItemsArray;
 
-	public RankingArrayList(JSONObject response, Bitmap defaultBitmap) {
+	public RankingArrayList(JSONObject response) {
 		super();
-		init(response, defaultBitmap);
+		init(response);
 	}
 
-	private void init(JSONObject response, Bitmap defaultBitmap) {
+	private void init(JSONObject response) {
 		try {
 			mItemsArray = response.getJSONArray("Items");
 			for (Integer i = 0; i < mItemsArray.length(); i++) {

@@ -6,8 +6,6 @@ import org.json.JSONObject;
 import own.fuyupuyo.common.PuyoUtil;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
@@ -32,18 +30,11 @@ public class RankingResponse implements Response.Listener<JSONObject> {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RankingArrayList list = new RankingArrayList(response, defaultBitmap());
+		RankingArrayList list = new RankingArrayList(response);
 		ItemAdapter adapter = new ItemAdapter(mActivity, list, mQueue);
 		OnRankingItemClickListener listener = new OnRankingItemClickListener(
 				mActivity);
 		mListView.setAdapter(adapter);
 		mListView.setOnItemClickListener(listener);
 	}
-
-	private Bitmap defaultBitmap() {
-		Bitmap defaultBitmap = BitmapFactory.decodeResource(
-				mActivity.getResources(), R.drawable.ic_launcher);
-		return defaultBitmap;
-	}
-
 }

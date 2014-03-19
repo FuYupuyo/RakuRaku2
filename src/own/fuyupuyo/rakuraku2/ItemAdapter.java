@@ -8,15 +8,13 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
 
+import own.fuyupuyo.common.BitmapLruCache;
 import own.fuyupuyo.model.RankingItem;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ItemAdapter extends ArrayAdapter<RankingItem> {
@@ -30,22 +28,8 @@ public class ItemAdapter extends ArrayAdapter<RankingItem> {
 		mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		mCache = getCache();
+		mCache = new BitmapLruCache();
 		mImageLoader = new ImageLoader(queue, mCache);
-	}
-
-	//なにも返さない
-	private ImageCache getCache() {
-		return new ImageCache() {
-			@Override
-			public Bitmap getBitmap(String url) {
-				return null;
-			}
-
-			@Override
-			public void putBitmap(String url, Bitmap bitmap) {
-			}
-		};
 	}
 
 	@Override
@@ -58,12 +42,11 @@ public class ItemAdapter extends ArrayAdapter<RankingItem> {
 		RankingItem item = (RankingItem) getItem(position);
 
 		NetworkImageView smallImageView;
-		smallImageView = (NetworkImageView) convertView.findViewById(R.id.small_image);
-//		smallImageView.setImageBitmap(item.getSmallImage());
-		
+		smallImageView = (NetworkImageView) convertView
+				.findViewById(R.id.small_image);
+
 		ImageListener listener = ImageLoader.getImageListener(smallImageView,
-				android.R.drawable.spinner_background,
-				android.R.drawable.ic_dialog_alert);
+				android.R.drawable.spinner_background, R.drawable.ic_launcher);
 		mImageLoader.get(item.getSmallImageUrl(), listener);
 		smallImageView.setImageUrl(item.getSmallImageUrl(), mImageLoader);
 
