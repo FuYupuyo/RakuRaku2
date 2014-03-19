@@ -56,10 +56,7 @@ public class PageDispatcher {
 			}
 			mIntent = new Intent(ctx, ItemActivity.class);
 			RankingItem item = (RankingItem) obj;
-			mIntent.putExtra("url", item.getImageUrl());
-			mIntent.putExtra("name", item.getName());
-			mIntent.putExtra("price", item.getPrice() + "円");
-			mIntent.putExtra("caption", item.getCaption());
+			mIntent.putExtra("item", item);
 			ctx.startActivity(mIntent);
 			break;
 

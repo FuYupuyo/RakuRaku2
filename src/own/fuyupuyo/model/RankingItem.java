@@ -1,6 +1,9 @@
 package own.fuyupuyo.model;
 
-public class RankingItem {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class RankingItem implements Serializable {
 	private String smallImageUrl;
 	private String imageUrl;
 	private String name;

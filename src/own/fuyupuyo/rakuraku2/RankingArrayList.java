@@ -15,27 +15,27 @@ public class RankingArrayList extends ArrayList<RankingItem> {
 
 	public RankingArrayList(JSONObject response) {
 		super();
-		init(response);
-	}
-
-	private void init(JSONObject response) {
 		try {
-			mItemsArray = response.getJSONArray("Items");
-			for (Integer i = 0; i < mItemsArray.length(); i++) {
-				JSONObject Item;
-				Item = mItemsArray.getJSONObject(i).getJSONObject("Item");
-				String smallImageurl = Item.getJSONArray("smallImageUrls")
-						.getJSONObject(0).getString("imageUrl");
-				String imageUrl = PuyoUtil.cutParameter(smallImageurl);
-				String name = Item.getString("itemName");
-				String price = Item.getString("itemPrice");
-				String caption = Item.getString("itemCaption");
-				RankingItem data = new RankingItem(smallImageurl, imageUrl,
-						name, price, caption);
-				add(data);
-			}
+			init(response);
 		} catch (JSONException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void init(JSONObject response) throws JSONException {
+		mItemsArray = response.getJSONArray("Items");
+		for (Integer i = 0; i < mItemsArray.length(); i++) {
+			JSONObject Item;
+			Item = mItemsArray.getJSONObject(i).getJSONObject("Item");
+			String smallImageurl = Item.getJSONArray("smallImageUrls")
+					.getJSONObject(0).getString("imageUrl");
+			String imageUrl = PuyoUtil.cutParameter(smallImageurl);
+			String name = Item.getString("itemName");
+			String price = Item.getString("itemPrice");
+			String caption = Item.getString("itemCaption");
+			RankingItem data = new RankingItem(smallImageurl, imageUrl, name,
+					price, caption);
+			add(data);
 		}
 	}
 }

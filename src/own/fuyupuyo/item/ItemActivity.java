@@ -3,6 +3,7 @@ package own.fuyupuyo.item;
 import own.fuyupuyo.common.BitmapLruCache;
 import own.fuyupuyo.common.PageDispatcher;
 import own.fuyupuyo.common.PuyoUtil;
+import own.fuyupuyo.model.RankingItem;
 import own.fuyupuyo.rakuraku2.R;
 
 import com.android.volley.RequestQueue;
@@ -43,14 +44,15 @@ public class ItemActivity extends Activity {
 		mCache = new BitmapLruCache();
 		mRequestQueue = Volley.newRequestQueue(getApplicationContext());
 		mImageLoader = new ImageLoader(mRequestQueue, mCache);
+		RankingItem item = (RankingItem) intent.getSerializableExtra("item");
 		NetworkImageView image = (NetworkImageView) findViewById(R.id.item_image);
-		image.setImageUrl(intent.getStringExtra("url"), mImageLoader);
+		image.setImageUrl(item.getImageUrl(), mImageLoader);
 		mName = (TextView) findViewById(R.id.item_name);
-		mName.setText(intent.getStringExtra("name"));
+		mName.setText(item.getName());
 		mPrice = (TextView) findViewById(R.id.item_price);
-		mPrice.setText(intent.getStringExtra("price"));
+		mPrice.setText(item.getPrice() + "円");
 		mCaption = (TextView) findViewById(R.id.item_caption);
-		CharSequence cs = Html.fromHtml(intent.getStringExtra("caption"));
+		CharSequence cs = Html.fromHtml(item.getCaption());
 		mCaption.setText(cs);
 	}
 
