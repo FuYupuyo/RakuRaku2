@@ -5,6 +5,7 @@ import java.util.List;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -32,31 +33,46 @@ public class ItemAdapter extends ArrayAdapter<RankingItem> {
 		mImageLoader = new ImageLoader(queue, mCache);
 	}
 
+	static class ViewHolder {
+		NetworkImageView smallImageView;
+		TextView itemRankTextView;
+		TextView itemNameTextView;
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
+
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.ranking_list_item, parent,
 					false);
+			holder = new ViewHolder();
+			holder.smallImageView = (NetworkImageView) convertView
+					.findViewById(R.id.small_image);
+			holder.itemRankTextView = (TextView) convertView
+					.findViewById(R.id.item_rank_text);
+			holder.itemNameTextView = (TextView) convertView
+					.findViewById(R.id.item_name_text);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-
 		RankingItem item = (RankingItem) getItem(position);
 
-		NetworkImageView smallImageView;
-		smallImageView = (NetworkImageView) convertView
-				.findViewById(R.id.small_image);
+		ImageContainer imageContainer = (ImageContainer) holder.smallImageView.getTag();
+		if (imageContainer != null) {
+			imageContainer.cancelRequest();
+		}
 
-		ImageListener listener = ImageLoader.getImageListener(smallImageView,
-				android.R.drawable.spinner_background, R.drawable.ic_launcher);
+		ImageListener listener = ImageLoader.getImageListener(
+				holder.smallImageView, android.R.drawable.spinner_background,
+				R.drawable.ic_launcher);
 		mImageLoader.get(item.getSmallImageUrl(), listener);
-		smallImageView.setImageUrl(item.getSmallImageUrl(), mImageLoader);
-
-		TextView itemRankTextView = (TextView) convertView
-				.findViewById(R.id.item_rank_text);
-		itemRankTextView.setText(String.format("%1$02d", position + 1) + "位");
-
-		TextView itemNameTextView = (TextView) convertView
-				.findViewById(R.id.item_name_text);
-		itemNameTextView.setText(item.getName());
+		
+	    holder.smallImageView.setTag(mImageLoader.get(item.getSmallImageUrl(), listener));
+		holder.smallImageView.setImageUrl(item.getSmallImageUrl(), mImageLoader);
+		holder.itemRankTextView.setText(String.format("%1$02d", position + 1) + "位");
+		holder.itemNameTextView.setText(item.getName());
 
 		return convertView;
 	}
