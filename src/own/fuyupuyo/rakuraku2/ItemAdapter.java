@@ -69,7 +69,7 @@ public class ItemAdapter extends ArrayAdapter<RankingItem> {
 				R.drawable.ic_launcher);
 		mImageLoader.get(item.getSmallImageUrl(), listener);
 		
-	    holder.smallImageView.setTag(mImageLoader.get(item.getSmallImageUrl(), listener));
+		holder.smallImageView.setTag(mImageLoader.get(item.getSmallImageUrl(), listener));
 		holder.smallImageView.setImageUrl(item.getSmallImageUrl(), mImageLoader);
 		holder.itemRankTextView.setText(String.format("%1$02d", position + 1) + "位");
 		holder.itemNameTextView.setText(item.getName());
